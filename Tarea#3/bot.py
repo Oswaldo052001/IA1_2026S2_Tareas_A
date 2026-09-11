@@ -90,6 +90,11 @@ async def cmd_hola(update: Update, context: ContextTypes.DEFAULT_TYPE):
     nombre = update.effective_user.first_name or "amigo/a"
     await update.message.reply_text(f"Hola, {nombre}! Bienvenido/a al bot de la Tarea 3 de IA1.")
 
+async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    nombre = update.effective_user.first_name or "amigo/a"
+    await update.message.reply_text(
+        f"Hola, {nombre}! Soy el bot de la Tarea 3 de IA1.\n\n" + _texto_ayuda()
+    )
 
 async def cmd_hora(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ahora = datetime.now().strftime("%A %d de %B de %Y, %H:%M:%S")
@@ -310,6 +315,7 @@ def main():
     app = Application.builder().token(TELEGRAM_TOKEN).build()
 
     app.add_handler(CommandHandler("hola", cmd_hola))
+    app.add_handler(CommandHandler("start", cmd_start))
     app.add_handler(CommandHandler("hora", cmd_hora))
     app.add_handler(CommandHandler("contacto", cmd_contacto))
     app.add_handler(CommandHandler("integrantes", cmd_integrantes))
